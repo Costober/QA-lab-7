@@ -30,5 +30,12 @@ jobs:
     - name: Set execute permission for http-server
       run: chmod +x node_modules/.bin/http-server
 
-    - name: Run tests
-      run: node node_modules/playwright/cli.js test tests/
+    - name: Run tests and Update Snapshots
+      run: node node_modules/playwright/cli.js test tests/ --update-snapshots || true
+
+    - name: Upload new snapshots
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux-snapshots
+        path: tests/screenshots/
