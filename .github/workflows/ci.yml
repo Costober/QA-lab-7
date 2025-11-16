@@ -30,14 +30,3 @@ jobs:
     - name: Set execute permission for http-server
       run: chmod +x node_modules/.bin/http-server
 
-    # ↓ ЗМІНА №1: Змінена назва кроку та додано --update-snapshots ↓
-    - name: Run tests and Update Snapshots
-      run: node node_modules/playwright/cli.js test tests/ --update-snapshots || true
-
-    # ↓ ЗМІНА №2: Додано новий крок для завантаження артефактів ↓
-    - name: Upload new snapshots
-      if: always() # Завжди запускати цей крок
-      uses: actions/upload-artifact@v4
-      with:
-        name: linux-snapshots
-        path: tests/screenshots/ # Вказуємо папку, яку треба завантажити
