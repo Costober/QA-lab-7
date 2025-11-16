@@ -30,3 +30,5 @@ jobs:
     - name: Set execute permission for http-server
       run: chmod +x node_modules/.bin/http-server
 
+    - name: Run tests
+      run: node node_modules/playwright/cli.js test tests/
