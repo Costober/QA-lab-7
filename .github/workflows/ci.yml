@@ -24,6 +24,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm test
+    - name: Install Playwright Browsers
+      run: node node_modules/playwright/cli.js install --with-deps
 
+    - name: Set execute permission for http-server
+      run: chmod +x node_modules/.bin/http-server
+
+    - name: Run tests
+      run: node node_modules/playwright/cli.js test tests/
